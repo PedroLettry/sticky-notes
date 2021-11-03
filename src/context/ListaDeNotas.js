@@ -9,8 +9,30 @@ const ListaDeNotas = () => {
     setArrayNotas([...arrayNotas, { titulo, descricao }]);
   };
 
+  excluirNota = (id) => {
+    setArrayNotas(
+      arrayNotas.filter((nota) => {
+        return nota.id != id;
+      })
+    );
+  };
+
+  editarNota = (id, novaNota) => {
+    setArrayNotas(
+      arrayNotas.map((nota) => {
+        const notaAtualizada = { ...nota };
+        if (notaAtualizada.id == id) {
+          notaAtualizada = { ...notaAtualizada, ...novaNota };
+        }
+        return notaAtualizada;
+      })
+    );
+  };
+
   return (
-    <ListaDeNotasContext.Provider value={{}}></ListaDeNotasContext.Provider>
+    <ListaDeNotasContext.Provider
+      value={{ criarNota, excluirNota, editarNota }}
+    ></ListaDeNotasContext.Provider>
   );
 };
 
